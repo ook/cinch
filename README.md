@@ -1,10 +1,7 @@
 Cinch - The IRC Bot Building Framework
 =====================================
 
-**The Cinch project is no longer maintained. No new features will be
-added, and no bugs will be fixed. The repository has been archived. If
-you wish to continue developing Cinch, please fork the project. I am
-not accepting new maintainers for this project.**
+Non official Cinch repository. My goal is to bring Cinch into Ruby 3 world.
 
 Description
 -----------
