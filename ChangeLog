@@ -1,3 +1,7 @@
+* Cinch 2.4.0, UNRELEASED
+  - Drop support before ruby 3.0
+  - Fix String.encoding issues
+
 * Cinch 2.3.2, 25 April 2016
   - Fix exception and premature timeouts in DCC send
 
