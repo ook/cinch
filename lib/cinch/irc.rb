@@ -286,6 +286,11 @@ module Cinch
       @queue.queue(msg)
     end
 
+    # Shortcut queue and process immedialty the command to the socket
+    def direct_send(msg)
+      @queue.direct_process(msg)
+    end
+
     private
     def set_leaving_user(message, user, events)
       events << [:leaving, user]

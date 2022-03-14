@@ -110,13 +110,17 @@ module Cinch
     def log(messages, event = :debug, level = event)
       return unless will_log?(level)
       @mutex.synchronize do
-        Array(messages).each do |message|
-          message = format_general(message)
-          message = format_message(message, event)
+        direct_log(messages, event)
+      end
+    end
 
-          next if message.nil?
-          @output.puts message.encode("locale", invalid: :replace, undef: :replace)
-        end
+    def direct_log(messages, event = :debug)
+      Array(messages).each do |message|
+        message = format_general(message)
+        message = format_message(message, event)
+
+        next if message.nil?
+        @output.puts message.encode("locale", invalid: :replace, undef: :replace)
       end
     end
 

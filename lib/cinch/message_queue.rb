@@ -60,6 +60,17 @@ module Cinch
       end
     end
 
+    def direct_process(message)
+      to_send = Cinch::Utilities::Encoding.encode_outgoing(message, @bot.config.encoding)
+      @socket.write(to_send + "\r\n")
+      @log << Time.now
+      @bot.loggers.direct_outgoing(message)
+
+      @time_since_last_send = Time.now
+    rescue IOError
+      @bot.loggers.error "Could not send message (connectivity problems): #{message}"
+    end
+
     private
     def wait
       if @log.size > 1
@@ -90,18 +101,9 @@ module Cinch
       else
         @queues_to_process << queue
       end
-
-      begin
-        to_send = Cinch::Utilities::Encoding.encode_outgoing(message, @bot.config.encoding)
-        @socket.write(to_send + "\r\n")
-        @log << Time.now
-        @bot.loggers.outgoing(message)
-
-        @time_since_last_send = Time.now
-      rescue IOError
-        @bot.loggers.error "Could not send message (connectivity problems): #{message}"
-      end
+      direct_process(message)
     end
+
 
   end # class MessageQueue
 end

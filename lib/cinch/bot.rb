@@ -226,7 +226,7 @@ module Cinch
       @quitting = true
       command   = message ? "QUIT :#{message}" : "QUIT"
 
-      @irc.send command
+      @irc.direct_send command
     end
 
     # Connects the bot to a server.

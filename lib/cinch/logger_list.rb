@@ -66,6 +66,10 @@ module Cinch
       (m = filter(message, :outgoing)) && each {|l| l.outgoing(m)}
     end
 
+    def direct_outgoing(message)
+      (m = filter(message, :outgoing)) && each {|l| l.direct_log(m)}
+    end
+
     # (see Logger#exception)
     def exception(e)
       each {|l| l.exception(e)}
